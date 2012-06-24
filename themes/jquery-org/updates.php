@@ -1,59 +1,34 @@
 <?php
-/**
- * The main template file.
- *
- * This is the most generic template file in a WordPress theme
- * and one of the two required files for a theme (the other being style.css).
- * It is used to display a page when nothing more specific matches a query.
- * E.g., it puts together the home page when no home.php file exists.
- * Learn more: http://codex.wordpress.org/Template_Hierarchy
- *
- * @package WordPress
- * @subpackage Twenty_Eleven
- */
+/*
+Template Name: Updates Page
+*/
+?>
+<?php get_header() ?>
 
-get_header(); ?>
+	<div id="container">
+		<div id="content">
+<div class="post-header roundedTop">
+<h2>Updates</h2>
+<p class="large">Status updates from members of the jQuery Team.</p>
+</div>
 
-	      <!-- body -->
-	      <?php global $sidebar; ?>
-		<div id="body" class="clearfix <?php echo $sidebar; ?>">
-			<div class="inner" role="main">
+			<div id="nav-above" class="navigation">
+				<div class="nav-previous"><?php next_posts_link(__( '<span class="meta-nav">&laquo;</span> Older posts', 'sandbox' )) ?></div>
+				<div class="nav-next"><?php previous_posts_link(__( 'Newer posts <span class="meta-nav">&raquo;</span>', 'sandbox' )) ?></div>
+			</div>
 
-			<?php $my_query = new WP_Query("post_type=post"); ?>
-			<?php if ( $my_query->have_posts() ) : ?>
+<?php $paged = (get_query_var('paged')) ? get_query_var('paged') : 1; query_posts("posts_per_page=10&paged=$paged"); ?>
+<?php while ( have_posts() ) : the_post() ?>
+<?php get_template_part( 'loop', 'post' ); ?>
+<?php comments_template() ?>
+<?php endwhile; ?>
 
-				<?php twentyeleven_content_nav( 'nav-above' ); ?>
+			<div id="nav-below" class="navigation">
+				<div class="nav-previous"><?php next_posts_link(__( '<span class="meta-nav">&laquo;</span> Older posts', 'sandbox' )) ?></div>
+				<div class="nav-next"><?php previous_posts_link(__( 'Newer posts <span class="meta-nav">&raquo;</span>', 'sandbox' )) ?></div>
+			</div>
 
-				<?php /* Start the Loop */ ?>
-				<?php while ( $my_query->have_posts() ) : $my_query->the_post(); ?>
+		</div><!-- #content -->
+	</div><!-- #container -->
 
-					<?php get_template_part( 'content', get_post_format() ); ?>
-
-				<?php endwhile; ?>
-
-				<?php twentyeleven_content_nav( 'nav-below' ); ?>
-
-			<?php else : ?>
-
-				<article id="post-0" class="post no-results not-found">
-					<header class="entry-header">
-						<h1 class="entry-title"><?php _e( 'Nothing Found', 'twentyeleven' ); ?></h1>
-					</header><!-- .entry-header -->
-
-					<div class="entry-content">
-						<p><?php _e( 'Apologies, but no results were found for the requested archive.', 'twentyeleven' ); ?></p>
-					</div><!-- .entry-content -->
-				</article><!-- #post-0 -->
-
-			<?php endif; ?>
-			<? wp_reset_postdata(); ?>
-
-			</div><!-- .inner -->
-
-			<?php if($sidebar): ?>
-			      <?php get_sidebar(); ?>
-			<?php endif; ?>
-
-		</div><!-- #body -->
-
-<?php get_footer(); ?>
+<?php get_footer() ?>
