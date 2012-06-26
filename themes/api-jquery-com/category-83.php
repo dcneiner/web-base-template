@@ -35,7 +35,7 @@ $sorted_list = array(
 			?>
 
   <?php
-  $pageposts = $wpdb->get_results("SELECT *, REPLACE(post_name, 'jQuery.', '') as trimname FROM wp_posts as p, wp_term_taxonomy as tt, wp_term_relationships as t WHERE p.post_status='publish' AND p.post_type = 'post' AND p.post_date < NOW() AND (tt.term_taxonomy_id=$cat AND t.term_taxonomy_id=$cat OR tt.parent=$cat AND t.term_taxonomy_id=tt.term_taxonomy_id) AND t.object_id=p.ID ORDER BY trimname;");
+  $pageposts = $wpdb->get_results("SELECT *, REPLACE(post_name, 'jQuery.', '') as trimname FROM wp_3_posts as p, wp_3_term_taxonomy as tt, wp_3_term_relationships as t WHERE p.post_status='publish' AND p.post_type = 'post' AND (tt.term_taxonomy_id=$cat AND t.term_taxonomy_id=$cat OR tt.parent=$cat AND t.term_taxonomy_id=tt.term_taxonomy_id) AND t.object_id=p.ID ORDER BY trimname;");
 
   if ($pageposts):
 

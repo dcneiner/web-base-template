@@ -195,7 +195,7 @@ function build_options($options) {
 function apiquery($vars) {
   global $wpdb;
 
-  $tables = array('wp_posts as p');
+  $tables = array('wp_3_posts as p');
   $wheres = array("p.post_status='publish' AND p.post_type = 'post'");
   $wherecat = array();
   $usedcat = false;
@@ -299,8 +299,8 @@ function apiquery($vars) {
 
 
   if ($usedcat):
-    $tables[] = "wp_term_taxonomy as tt";
-    $tables[] = "wp_term_relationships as tr";
+    $tables[] = "wp_3_term_taxonomy as tt";
+    $tables[] = "wp_3_term_relationships as tr";
 
     $wherecat[] = "tr.term_taxonomy_id=tt.term_taxonomy_id";
     $wheres[] = "(" . implode(' AND ', $wherecat) . ") AND tr.object_id=p.ID";

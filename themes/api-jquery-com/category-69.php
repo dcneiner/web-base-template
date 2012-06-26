@@ -12,21 +12,21 @@
 
   if ( !empty($categorydesc) ) {
     echo apply_filters( 'archive_meta', '<br/><div class="archive-meta">' . $categorydesc . '</div>' );
-  } 
+  }
 ?>
 
 
 <?php
 
-$pageposts = $wpdb->get_results("SELECT *, REPLACE(post_name, 'jQuery.', '') as trimname FROM wp_posts as p, wp_term_taxonomy as tt, wp_term_relationships as t WHERE p.post_status='publish' AND p.post_type = 'post' AND p.post_date < NOW() AND (tt.term_taxonomy_id=$cat AND t.term_taxonomy_id=$cat OR tt.parent=$cat AND t.term_taxonomy_id=tt.term_taxonomy_id) AND t.object_id=p.ID ORDER BY trimname;");
+$pageposts = $wpdb->get_results("SELECT *, REPLACE(post_name, 'jQuery.', '') as trimname FROM wp_3_posts as p, wp_3_term_taxonomy as tt, wp_3_term_relationships as t WHERE p.post_status='publish' AND p.post_type = 'post' AND (tt.term_taxonomy_id=$cat AND t.term_taxonomy_id=$cat OR tt.parent=$cat AND t.term_taxonomy_id=tt.term_taxonomy_id) AND t.object_id=p.ID ORDER BY trimname;");
 
-if ($pageposts): 
+if ($pageposts):
   $catlist = array();
   $versionlist = array();
-  $postlist = array(); 
-  
-  foreach ($pageposts as $post): 
-    setup_postdata($post); 
+  $postlist = array();
+
+  foreach ($pageposts as $post):
+    setup_postdata($post);
     if ( in_array($post->ID, $postlist) ) { continue;}
     $postlist[] = $post->ID;
 
@@ -45,28 +45,28 @@ if ($pageposts):
     	$content = get_the_content();
     	$category = get_the_category_by_ID($cat);
     	$pos = strpos( $category, "Version" );
-  
+
       $othercats = '<span class="entry-meta"><span class="cat-links">' . sprintf( __( '%s', 'sandbox' ), $cats_meow ) . '</span>';
       $othercats .= ' | <span><a href="' . get_edit_post_link( $post->ID)  . '">Edit</a></span>';
       $othercats .= '</span></span>';
-  
+
     	if ( $pos !== false ) {
     		$matches = array();
     		preg_match_all("/<added>([^<]+)</", $content, $matches);
         $maxVersion = max($matches[1]);
-        
+
 		    if (!isset($catlist[$maxVersion])):
 		      $catlist[$maxVersion] = array();
 		    endif;
 		    $catlist[$maxVersion][] = $post_start . $othercats . $post_end;
     	}
     endif;
-  endforeach; 
+  endforeach;
   ?>
   <ul id="method-list" class="method-list">
   <?php
   krsort($catlist);
-  
+
   foreach ($catlist as $key => $value) {
     echo '<li class="version-heading"><h2>Last Added/Updated in <a href="/category/version/' . $key . '/">Version ' . $key . '</a>:</h2></li>';
     echo implode("\n", $value);
