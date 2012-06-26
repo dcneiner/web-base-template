@@ -29,7 +29,7 @@ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www')
 <?php wp_footer() ?>
   <script src="http://static.jquery.com/api/prettify.js"></script>
   <!-- <script src="/wp-content/themes/jquery.0002/demos.js?v=20110228"></script> -->
-  <script src="http://static.jquery.com/api/demo.js?v=20110228"></script>
+  <script src="/resources/demo.js"></script>
 <?php endif; ?>
 </body>
 </html>
