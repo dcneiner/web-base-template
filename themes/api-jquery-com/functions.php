@@ -470,7 +470,7 @@ function sandbox_commenter_link() {
 }
 
 // Function to filter the default gallery shortcode
-function sandbox_gallery($attr) {
+function sandbox_gallery($attr = array()) {
   global $post;
   if ( isset($attr['orderby']) ) {
     $attr['orderby'] = sanitize_sql_orderby($attr['orderby']);
@@ -545,7 +545,7 @@ function widget_sandbox_search($args) {
 ?>
       <?php echo $before_widget ?>
         <?php echo $before_title ?><label for="s"><?php echo $title ?></label><?php echo $after_title ?>
-        <form id="searchform" class="blog-search" method="get" action="<?php bloginfo('home') ?>">
+        <form id="searchform" class="blog-search" method="get" action="<?php bloginfo('url') ?>">
           <div>
             <input id="s" name="s" type="text" class="text" value="<?php the_search_query() ?>" size="10" tabindex="1" />
             <input type="submit" class="button" value="<?php echo $button ?>" tabindex="2" />
@@ -595,20 +595,7 @@ function widget_sandbox_meta($args) {
 }
 
 // Widget: RSS links; to match the Sandbox style
-function widget_sandbox_rsslinks($args) {
-  extract($args);
-  $options = get_option('widget_sandbox_rsslinks');
-  $title = empty($options['title']) ? __( 'RSS Links', 'sandbox' ) : attribute_escape($options['title']);
-?>
-    <?php echo $before_widget; ?>
-      <?php echo $before_title . $title . $after_title; ?>
-      <ul>
-        <li><a href="<?php bloginfo('rss2_url') ?>" title="<?php echo wp_specialchars( get_bloginfo('name'), 1 ) ?> <?php _e( 'Posts RSS feed', 'sandbox' ); ?>" rel="alternate" type="application/rss+xml"><?php _e( 'All posts', 'sandbox' ) ?></a></li>
-        <li><a href="<?php bloginfo('comments_rss2_url') ?>" title="<?php echo wp_specialchars(bloginfo('name'), 1) ?> <?php _e( 'Comments RSS feed', 'sandbox' ); ?>" rel="alternate" type="application/rss+xml"><?php _e( 'All comments', 'sandbox' ) ?></a></li>
-      </ul>
-    <?php echo $after_widget; ?>
-<?php
-}
+// REMOVED
 
 // Widget: RSS links; element controls for customizing text within Widget plugin
 function widget_sandbox_rsslinks_control() {
@@ -649,7 +636,7 @@ function sandbox_widgets_init() {
     'description'  =>  __( "A search form for your blog (Sandbox)", "sandbox" )
   );
   wp_register_sidebar_widget( 'search', __( 'Search', 'sandbox' ), 'widget_sandbox_search', $widget_ops );
-  unregister_widget_control('search'); // We're being Sandbox-specific; remove WP default
+  wp_unregister_widget_control('search'); // We're being Sandbox-specific; remove WP default
   wp_register_widget_control( 'search', __( 'Search', 'sandbox' ), 'widget_sandbox_search_control' );
 
   // Sandbox Meta widget
@@ -658,7 +645,7 @@ function sandbox_widgets_init() {
     'description'  =>  __( "Log in/out and administration links (Sandbox)", "sandbox" )
   );
   wp_register_sidebar_widget( 'meta', __( 'Meta', 'sandbox' ), 'widget_sandbox_meta', $widget_ops );
-  unregister_widget_control('meta'); // We're being Sandbox-specific; remove WP default
+  wp_unregister_widget_control('meta'); // We're being Sandbox-specific; remove WP default
   wp_register_widget_control( 'meta', __( 'Meta', 'sandbox' ), 'wp_widget_meta_control' );
 
   //Sandbox RSS Links widget
@@ -677,7 +664,7 @@ load_theme_textdomain('sandbox');
 add_action( 'init', 'sandbox_widgets_init' );
 
 // Registers our function to filter default gallery shortcode
-add_filter( 'post_gallery', 'sandbox_gallery', $attr );
+// add_filter( 'post_gallery', 'sandbox_gallery', $attr );
 
 // Adds filters for the description/meta content in archives.php
 add_filter( 'archive_meta', 'wptexturize' );

@@ -69,7 +69,7 @@ endwhile; ?>
       ?>
     </ul>
   <?php endif; ?>
-  
+
 <?php else : ?>
 
 			<div id="post-0" class="post no-results not-found">
@@ -77,7 +77,7 @@ endwhile; ?>
 				<div class="entry-content">
 					<p><?php _e( 'Sorry, but nothing matched your search criteria. Please try again with some different keywords.', 'sandbox' ) ?></p>
 				</div>
-				<form id="searchform-no-results" class="blog-search" method="get" action="<?php bloginfo('home') ?>">
+				<form id="searchform-no-results" class="blog-search" method="get" action="<?php bloginfo('url') ?>">
 					<div>
 						<input id="s-no-results" name="s" class="text" type="text" value="<?php the_search_query() ?>" size="40" />
 						<input class="button" type="submit" value="<?php _e( 'Find', 'sandbox' ) ?>" />

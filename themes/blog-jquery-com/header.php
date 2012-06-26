@@ -49,11 +49,11 @@
 					</ul>
 				</div><!-- /#secondaryNavigation -->
 
-				
+
 
 				<h1>Blog</h1>
 
-				<form id="jq-primarySearchForm" action="<?php bloginfo('home'); ?>">
+				<form id="jq-primarySearchForm" action="<?php bloginfo('url'); ?>">
 
 					<div>
 						<input type="hidden" value="1" name="ns0"/>

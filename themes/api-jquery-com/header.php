@@ -48,7 +48,7 @@
 
 
 
-        <form id="jq-primarySearchForm" action="<?php bloginfo('home') ?>" method="get" autocomplete="off">
+        <form id="jq-primarySearchForm" action="<?php bloginfo('url') ?>" method="get" autocomplete="off">
           <div>
             <input type="hidden" value="1" name="ns0"/>
             <label for="jq-primarySearch">Search <span class="jq-jquery">jQuery</span></label>
@@ -58,7 +58,7 @@
         </form>
 
 <!--
-        <h1 id="blog-title"><span><a href="<?php bloginfo('home') ?>/" title="<?php echo wp_specialchars( get_bloginfo('name'), 1 ) ?>" rel="home"><?php bloginfo('name') ?></a></span></h1>
+        <h1 id="blog-title"><span><a href="<?php bloginfo('url') ?>/" title="<?php echo wp_specialchars( get_bloginfo('name'), 1 ) ?>" rel="home"><?php bloginfo('name') ?></a></span></h1>
         <div id="blog-description"><?php bloginfo('description') ?></div>
 -->
         <h1><?php bloginfo('name') ?></h1>
