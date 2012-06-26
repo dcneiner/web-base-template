@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title><?php wp_title( '-', true, 'right' ); echo wp_specialchars( get_bloginfo('name'), 1 ) ?></title>
+  <title><?php wp_title( '-', true, 'right' ); echo esc_html( get_bloginfo('name'), 1 ) ?></title>
   <meta http-equiv="content-type" content="<?php bloginfo('html_type') ?>; charset=<?php bloginfo('charset') ?>" />
 <?php if (is_single()): ?>
 <?php wp_head() // For plugins ?>
@@ -58,7 +58,7 @@
         </form>
 
 <!--
-        <h1 id="blog-title"><span><a href="<?php bloginfo('url') ?>/" title="<?php echo wp_specialchars( get_bloginfo('name'), 1 ) ?>" rel="home"><?php bloginfo('name') ?></a></span></h1>
+        <h1 id="blog-title"><span><a href="<?php bloginfo('url') ?>/" title="<?php echo esc_html( get_bloginfo('name'), 1 ) ?>" rel="home"><?php bloginfo('name') ?></a></span></h1>
         <div id="blog-description"><?php bloginfo('description') ?></div>
 -->
         <h1><?php bloginfo('name') ?></h1>

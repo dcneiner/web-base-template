@@ -58,7 +58,7 @@
 					<div>
 						<input type="hidden" value="1" name="ns0"/>
 						<label for="primarySearch">Search <span class="jq-jquery">jQuery</span></label>
-						<input type="text" value="<?php echo wp_specialchars($s, 1); ?>" name="s" accesskey="f" title="Search jQuery" id="jq-primarySearch"/>
+						<input type="text" value="<?php echo esc_html($s, 1); ?>" name="s" accesskey="f" title="Search jQuery" id="jq-primarySearch"/>
 						<button type="submit" name="go" id="jq-searchGoButton"><span>Go</span></button>
 					</div>
 
