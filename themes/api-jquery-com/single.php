@@ -7,13 +7,9 @@
       <div id="post-<?php the_ID() ?>" <?php post_class(); ?>>
         <div class="entry-content">
         <div class="entry-title roundTop">
-          <?php if ($is_plugin): ?>
-          <h2 class="plugin-header">jQuery Plugin</h2>
-          <?php endif; ?>
-
           <h1 class="jq-clearfix"><?php the_title(); ?></h1>
           <div class="entry-meta jq-clearfix">
-            <?php echo $banner;  ?>
+
             Categories:
             <?php
             $all_cats = get_categories();
